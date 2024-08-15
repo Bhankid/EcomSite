@@ -5,14 +5,13 @@
 }
 
 /* Color Variables */
-.bc {
-  background-color: #5cb85c;
-}
-.heding {
-  color: #405867;
-}
-.pfont {
-  color: #5f6771;
+:root {
+  /* //....... Color ........// */
+  --primary-color: #ff3c78;
+  --light-black: rgba(0, 0, 0, 0.89);
+  --black: #000;
+  --white: #fff;
+  --grey: #aaa;
 }
 
 /* Transition Mixin Equivalent */
@@ -38,7 +37,7 @@
 
 /* Multi-Step Form Styling */
 .multi_step_form {
-  background: #f6f9fb;
+  background: var(--white);
   display: block;
   overflow: hidden;
 }
@@ -50,7 +49,7 @@
   min-height: 820px;
   max-width: 810px;
   margin: 0 auto;
-  background: #ffffff;
+  background: var(rgb(230, 152, 152));
   z-index: 1;
 }
 
@@ -67,7 +66,7 @@
 
 .multi_step_form #msform .tittle p {
   font: 400 16px/28px "Roboto", sans-serif;
-  color: #5f6771;
+  color: var(--white);
 }
 
 .multi_step_form #msform fieldset {
@@ -86,13 +85,13 @@
 .multi_step_form #msform fieldset h3 {
   text-align: center;
   font: 500 18px/35px "Roboto", sans-serif;
-  color: #3f4553;
+  color: var(--grey);
 }
 
 .multi_step_form #msform fieldset h6 {
   text-align: center;
   font: 400 15px/28px "Roboto", sans-serif;
-  color: #5f6771;
+  color: var(--grey);
   padding-bottom: 30px;
 }
 
@@ -134,7 +133,7 @@
   right: 0;
   font-size: 24px;
   line-height: 7px;
-  color: #5f6771;
+  color: var(--grey);
 }
 
 .multi_step_form #msform fieldset #phone {
@@ -161,7 +160,7 @@
 .multi_step_form #msform fieldset .form-control,
 .multi_step_form #msform fieldset .product_select {
   border-radius: 4px;
-  border: 1px solid #d8e1e7;
+  border: 1px solid var(--grey);
   padding: 0 20px;
   height: auto;
   font-family: "Roboto", sans-serif;
@@ -184,7 +183,7 @@
 .multi_step_form #msform fieldset .form-control:focus,
 .multi_step_form #msform fieldset .product_select:hover,
 .multi_step_form #msform fieldset .product_select:focus {
-  border-color: #5cb85c;
+  border-color: var(--primary-color);
 }
 
 .multi_step_form #msform fieldset .form-control:focus::placeholder,
@@ -201,7 +200,7 @@
   top: 0;
   right: 20px;
   font-size: 30px;
-  color: #5f6771;
+  color: var(--white);
 }
 
 /* Done Text Styling */
@@ -215,10 +214,10 @@
   line-height: 36px;
   font-size: 22px;
   margin-bottom: 10px;
-  background-color: #5cb85c;
+  background-color: var(--primary-color);
   display: inline-block;
   border-radius: 50%;
-  color: #ffffff;
+  color: var(--white);
   text-align: center;
 }
 
@@ -260,7 +259,7 @@
   position: absolute;
   top: 4px;
   right: 0;
-  background-color: #5cb85c;
+  background-color: var(--primary-color);
   display: inline-block;
   border-radius: 50%;
   color: #ffffff;
@@ -272,7 +271,7 @@
   font-weight: 500;
   font-size: 15px;
   line-height: 23px;
-  color: #5f6771;
+  color: var(--white);
   padding: 0;
 }
 
@@ -296,7 +295,7 @@
   line-height: 31px;
   border: 1px solid #99a2a8;
   text-align: start;
-  color: #5f6771;
+  color: var(--white);
   transition: all 300ms linear 0s;
 }
 .multi_step_form
@@ -322,9 +321,9 @@
   .input-group
   .custom-file
   .custom-file-label:focus {
-  background-color: #5cb85c;
-  border-color: #5cb85c;
-  color: #fff;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--white);
 }
 
 .multi_step_form #msform fieldset .input-group input {
@@ -342,11 +341,11 @@
   font-weight: 600;
   font-size: 15px;
   line-height: 28px;
-  color: #5f6771;
+  color: var(--white);
 }
 
 .multi_step_form #msform fieldset .file_added li a {
-  color: #5cb85c;
+  color: var(--primary-color);
   font-weight: 400;
   display: inline-block;
   position: relative;
@@ -369,7 +368,7 @@
 
 .multi_step_form #msform #progressbar li {
   list-style-type: none;
-  color: #99a2a8;
+  color: var(--grey);
   font-size: 9px;
   width: calc(100% / 3);
   float: left;
@@ -419,25 +418,25 @@
 }
 
 .multi_step_form #msform #progressbar li.active {
-  color: #5cb85c;
+  color: var(--primary-color);
 }
 
 .multi_step_form #msform #progressbar li.active::before,
 .multi_step_form #msform #progressbar li.active::before {
-  background: #5cb85c;
+  background: var(--primary-color);
   color: white;
 }
 
 /* Button Styling */
 .multi_step_form #msform .action-button {
-  background: #5cb85c;
+  background: var(--primary-color);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   min-width: 130px;
   font: 700 14px/40px "Roboto", sans-serif;
-  border: 1px solid #5cb85c;
+  border: 1px solid var(--primary-color);
   margin: 15px 18px;
   text-transform: uppercase;
   display: inline-block;
