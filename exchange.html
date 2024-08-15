@@ -11,11 +11,34 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79gxwX11QsdauNPvNxgNYybz2lwWLHbVC+/JnrtdBGop9DTKHcKIkL"
+      crossorigin="anonymous"
+    />
     <script
       src="https://code.jquery.com/jquery-3.7.1.min.js"
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
       crossorigin="anonymous"
     ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.8.1/build/css/intlTelInput.css"
+    />
+    <link
+      rel="stylesheet"
+      href="jquery-nice-select-1.1.0\css\nice-select.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/ionicons@4.5.10/dist/css/ionicons.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
     <title>Document</title>
   </head>
   <body>
@@ -58,7 +81,9 @@
             </div>
           </div>
           <div class="done_text">
-            <a href="#" class="don_icon"><i class="ion-android-done"></i></a>
+            <a href="#" class="don_icon"><i class="fas fa-check-circle"></i></a>
+            <!-- <a href="#" class="don_icon"><i class="ion-ios-checkmark"></i></a>
+           <a href="#"><i class="ion-ios-paperclip"></i>national_id_card.png</a> -->
             <h6>
               A secret code is sent to your phone. <br />Please enter it here.
             </h6>
@@ -79,24 +104,26 @@
           <h6>Please upload any of these documents to verify your Identity.</h6>
           <div class="passport">
             <h4>Govt. ID card <br />PassPort <br />Driving License.</h4>
-            <a href="#" class="don_icon"><i class="ion-android-done"></i></a>
+            <a href="#" class="don_icon"><i class="fas fa-check-circle"></i></a>
           </div>
           <div class="input-group">
             <div class="custom-file">
               <input type="file" class="custom-file-input" id="upload" />
               <label class="custom-file-label" for="upload"
-                ><i class="ion-android-cloud-outline"></i>Choose file</label
+                ><i class="fas fa-cloud-upload-alt"></i>Choose file</label
               >
             </div>
           </div>
           <ul class="file_added">
             <li>File Added:</li>
             <li>
-              <a href="#"><i class="ion-paperclip"></i>national_id_card.png</a>
+              <a href="#"
+                ><i class="fas fa-paperclip"></i>national_id_card.png</a
+              >
             </li>
             <li>
               <a href="#"
-                ><i class="ion-paperclip"></i>national_id_card_back.png</a
+                ><i class="fas fa-paperclip"></i>national_id_card.png</a
               >
             </li>
           </ul>
@@ -149,5 +176,19 @@
     </section>
     <!-- End Multi step form -->
     <script src="exchange.js"></script>
+
+    <script src="jquery-nice-select-1.1.0\js\jquery.js"></script>
+
+    <script src="jquery-nice-select-1.1.0\js\jquery.nice-select.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.8.1/build/js/intlTelInput.min.js"></script>
+
+    <script>
+      const input = document.querySelector("#phone");
+      window.intlTelInput(input, {
+        utilsScript:
+          "https://cdn.jsdelivr.net/npm/intl-tel-input@23.8.1/build/js/utils.js",
+      });
+    </script>
   </body>
 </html>

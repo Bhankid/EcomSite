@@ -1,238 +1,151 @@
-(function ($) {
+(function () {
   "use strict";
 
-  //* Form js
+  // Form JS
   function verificationForm() {
-    //jQuery time
-    var current_fs, next_fs, previous_fs; //fieldsets
-    var left, opacity, scale; //fieldset properties which we will animate
-    var animating; //flag to prevent quick multi-click glitches
+    let current_fs, next_fs, previous_fs; // Fieldset
+    let left, opacity, scale; // Fieldset properties for animation
+    let animating = false; // Flag to prevent quick multi-click glitches
 
-    $(".next").click(function () {
-      if (animating) return false;
-      animating = true;
+    document.querySelectorAll(".next").forEach((nextButton) => {
+      nextButton.addEventListener("click", function () {
+        if (animating) return false;
+        animating = true;
 
-      current_fs = $(this).parent();
-      next_fs = $(this).parent().next();
+        current_fs = this.parentElement;
+        next_fs = this.parentElement.nextElementSibling;
 
-      //activate next step on progressbar using the index of next_fs
-      $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+        // Activate next step on progress bar
+        const nextIndex = Array.from(
+          document.querySelectorAll("fieldset")
+        ).indexOf(next_fs);
+        document
+          .querySelectorAll("#progressbar li")
+          [nextIndex].classList.add("active");
 
-      //show the next fieldset
-      next_fs.show();
-      //hide the current fieldset with style
-      current_fs.animate(
-        {
-          opacity: 0,
-        },
-        {
-          step: function (now, mx) {
-            //as the opacity of current_fs reduces to 0 - stored in "now"
-            //1. scale current_fs down to 80%
-            scale = 1 - (1 - now) * 0.2;
-            //2. bring next_fs from the right(50%)
-            left = now * 50 + "%";
-            //3. increase opacity of next_fs to 1 as it moves in
-            opacity = 1 - now;
-            current_fs.css({
-              transform: "scale(" + scale + ")",
+        // Show the next fieldset
+        next_fs.style.display = "block";
+
+        // Animate current fieldset out and next fieldset in
+        const animateOut = current_fs.animate(
+          [
+            {
+              opacity: 1,
+              transform: "scale(1)",
+              position: "relative",
+              left: "0%",
+            },
+            {
+              opacity: 0,
+              transform: "scale(0.8)",
               position: "absolute",
-            });
-            next_fs.css({
-              left: left,
-              opacity: opacity,
-            });
-          },
-          duration: 800,
-          complete: function () {
-            current_fs.hide();
-            animating = false;
-          },
-          //this comes from the custom easing plugin
-          easing: "easeInOutBack",
-        }
-      );
+              left: "50%",
+            },
+          ],
+          {
+            duration: 800,
+            easing: "ease-in-out",
+          }
+        );
+
+        const animateIn = next_fs.animate(
+          [
+            { opacity: 0, left: "50%" },
+            { opacity: 1, left: "0%" },
+          ],
+          {
+            duration: 800,
+            easing: "ease-in-out",
+          }
+        );
+
+        animateOut.onfinish = function () {
+          current_fs.style.display = "none";
+          animating = false;
+        };
+      });
     });
 
-    $(".previous").click(function () {
-      if (animating) return false;
-      animating = true;
+    document.querySelectorAll(".previous").forEach((prevButton) => {
+      prevButton.addEventListener("click", function () {
+        if (animating) return false;
+        animating = true;
 
-      current_fs = $(this).parent();
-      previous_fs = $(this).parent().prev();
+        current_fs = this.parentElement;
+        previous_fs = this.parentElement.previousElementSibling;
 
-      //de-activate current step on progressbar
-      $("#progressbar li")
-        .eq($("fieldset").index(current_fs))
-        .removeClass("active");
+        // Deactivate current step on progress bar
+        const currentIndex = Array.from(
+          document.querySelectorAll("fieldset")
+        ).indexOf(current_fs);
+        document
+          .querySelectorAll("#progressbar li")
+          [currentIndex].classList.remove("active");
 
-      //show the previous fieldset
-      previous_fs.show();
-      //hide the current fieldset with style
-      current_fs.animate(
-        {
-          opacity: 0,
-        },
-        {
-          step: function (now, mx) {
-            //as the opacity of current_fs reduces to 0 - stored in "now"
-            //1. scale previous_fs from 80% to 100%
-            scale = 0.8 + (1 - now) * 0.2;
-            //2. take current_fs to the right(50%) - from 0%
-            left = (1 - now) * 50 + "%";
-            //3. increase opacity of previous_fs to 1 as it moves in
-            opacity = 1 - now;
-            current_fs.css({
-              left: left,
-            });
-            previous_fs.css({
-              transform: "scale(" + scale + ")",
-              opacity: opacity,
-            });
-          },
-          duration: 800,
-          complete: function () {
-            current_fs.hide();
-            animating = false;
-          },
-          //this comes from the custom easing plugin
-          easing: "easeInOutBack",
-        }
-      );
+        // Show the previous fieldset
+        previous_fs.style.display = "block";
+
+        // Animate current fieldset out and previous fieldset in
+        const animateOut = current_fs.animate(
+          [
+            { opacity: 1, left: "0%" },
+            { opacity: 0, left: "50%" },
+          ],
+          {
+            duration: 800,
+            easing: "ease-in-out",
+          }
+        );
+
+        const animateIn = previous_fs.animate(
+          [
+            { opacity: 0, transform: "scale(0.8)" },
+            { opacity: 1, transform: "scale(1)" },
+          ],
+          {
+            duration: 800,
+            easing: "ease-in-out",
+          }
+        );
+
+        animateOut.onfinish = function () {
+          current_fs.style.display = "none";
+          animating = false;
+        };
+      });
     });
 
-    $(".submit").click(function () {
-      return false;
+    document.querySelectorAll(".submit").forEach((submitButton) => {
+      submitButton.addEventListener("click", function () {
+        return false;
+      });
     });
   }
 
-  //* Add Phone no select
-  function phoneNoselect() {
-    if ($("#msform").length) {
-      $("#phone").intlTelInput();
-      $("#phone").intlTelInput("setNumber", "+880");
+  // Phone number select initialization
+  function phoneNiceSelect() {
+    if (document.getElementById("msform")) {
+      const phoneInput = document.getElementById("phone");
+      if (window.intlTelInput) {
+        window.intlTelInput(phoneInput);
+        phoneInput.value = "+233";
+      }
     }
   }
-  //* Select js
+
+  // Nice select initialization
   function nice_Select() {
-    if ($(".product_select").length) {
-      $("select").niceSelect();
+    if (document.querySelector(".product_select")) {
+      if (window.jQuery && window.jQuery.fn.niceSelect) {
+        document.querySelectorAll("select").forEach((selectElement) => {
+          window.jQuery(selectElement).niceSelect();
+        });
+      }
     }
   }
-  /*Function Calls*/
+
+  // Function Calls
   verificationForm();
-  phoneNoselect();
+  phoneNiceSelect();
   nice_Select();
-})(jQuery);
-
-// (function () {
-//   "use strict";
-
-//   // Form js
-//   function verificationForm() {
-//     var currentFs, nextFs, previousFs; // fieldsets
-//     var left, opacity, scale; // fieldset properties which we will animate
-//     var animating; // flag to prevent quick multi-click glitches
-
-//     document.querySelectorAll(".next").forEach(function (element) {
-//       element.addEventListener("click", function () {
-//         if (animating) return;
-//         animating = true;
-
-//         currentFs = element.parentNode;
-//         nextFs = currentFs.nextElementSibling;
-
-//         // activate next step on progressbar using the index of nextFs
-//         document
-//           .querySelectorAll("#progressbar li")
-//           [
-//             Array.prototype.indexOf.call(
-//               document.querySelectorAll("fieldset"),
-//               nextFs
-//             )
-//           ].classList.add("active");
-
-//         // show the next fieldset
-//         nextFs.style.display = "block";
-//         // hide the current fieldset with style
-//         currentFs.animate([{ opacity: 1 }, { opacity: 0 }], {
-//           duration: 800,
-//           fill: "forwards",
-//           easing: "easeInOutBack",
-//           iterations: 1,
-//           onComplete: function () {
-//             currentFs.style.display = "none";
-//             animating = false;
-//           },
-//         });
-//       });
-//     });
-
-//     document.querySelectorAll(".previous").forEach(function (element) {
-//       element.addEventListener("click", function () {
-//         if (animating) return;
-//         animating = true;
-
-//         currentFs = element.parentNode;
-//         previousFs = currentFs.previousElementSibling;
-
-//         // de-activate current step on progressbar
-//         document
-//           .querySelectorAll("#progressbar li")
-//           [
-//             Array.prototype.indexOf.call(
-//               document.querySelectorAll("fieldset"),
-//               currentFs
-//             )
-//           ].classList.remove("active");
-
-//         // show the previous fieldset
-//         previousFs.style.display = "block";
-//         // hide the current fieldset with style
-//         currentFs.animate([{ opacity: 1 }, { opacity: 0 }], {
-//           duration: 800,
-//           fill: "forwards",
-//           easing: "easeInOutBack",
-//           iterations: 1,
-//           onComplete: function () {
-//             currentFs.style.display = "none";
-//             animating = false;
-//           },
-//         });
-//       });
-//     });
-
-//     document.querySelectorAll(".submit").forEach(function (element) {
-//       element.addEventListener("click", function (event) {
-//         event.preventDefault();
-//       });
-//     });
-//   }
-
-//   // Add Phone no select
-//   function phoneNoselect() {
-//     if (document.getElementById("msform")) {
-//       var phoneInput = document.getElementById("phone");
-//       phoneInput.intlTelInput = new IntlTelInput(phoneInput, {
-//         initialCountry: "auto",
-//         preferredCountries: ["bd"],
-//       });
-//       phoneInput.intlTelInput.setNumber("+880");
-//     }
-//   }
-
-//   // Select js
-//   function nice_Select() {
-//     if (document.querySelector(".product_select")) {
-//       var selects = document.querySelectorAll("select");
-//       selects.forEach(function (select) {
-//         var niceSelect = new NiceSelect(select);
-//       });
-//     }
-//   }
-
-//   /* Function Calls */
-//   verificationForm();
-//   phoneNoselect();
-//   nice_Select();
-// })();
+})();
