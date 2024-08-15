@@ -37,7 +37,7 @@
 
 /* Multi-Step Form Styling */
 .multi_step_form {
-  background: var(--white);
+  background: hsla(0, 2%, 8%, 0.55);
   display: block;
   overflow: hidden;
 }
@@ -49,7 +49,7 @@
   min-height: 820px;
   max-width: 810px;
   margin: 0 auto;
-  background: var(rgb(230, 152, 152));
+  background: var(--white);
   z-index: 1;
 }
 
