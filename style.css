@@ -603,6 +603,7 @@ body {
   width: 250px;
   height: 370px;
   /* border: 2px solid black; */
+  animation: slide 5s linear 2s infinite normal forwards;
 }
 
 .seller .best-p1 img {
@@ -663,6 +664,23 @@ body {
   cursor: pointer;
 }
 
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-25%) scale(1.1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.2) ;
+  }
+  75% {
+    transform: translateX(-75%) scale(1.1);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
 /* //........ deal of week ........// */
 
 .deal_of_week {

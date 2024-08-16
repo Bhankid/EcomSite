@@ -73,7 +73,13 @@ body {
   box-shadow: 0 0 20px 0 #7f7f7f3d;
   cursor: pointer;
   border-radius: 50%;
+  transition: transform 0.4s ease-in-out;
 }
+
+.social-icons img:active {
+  transform: translateY(5px);
+}
+
 .input-group {
   top: 180px;
   position: absolute;
@@ -107,6 +113,11 @@ body {
   border: 0;
   outline: none;
   border-radius: 30px;
+  transition: transform 0.4s ease-in-out;
+}
+
+.submit-btn:active {
+  transform: translateY(5px);
 }
 
 .submit-btn:hover {
