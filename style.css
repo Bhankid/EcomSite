@@ -603,7 +603,7 @@ body {
   width: 250px;
   height: 370px;
   /* border: 2px solid black; */
-  animation: slide 5s linear 2s infinite normal forwards;
+  /* animation: slide 5s linear 2s infinite normal forwards; */
 }
 
 .seller .best-p1 img {
